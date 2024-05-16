@@ -1,11 +1,8 @@
 from utils.dice_game import DiceGame
 from utils.user_manager import UserManager
 
-usermanager = UserManager()
-dicegame = DiceGame()
-
 def main():
-    
+    usermanager = UserManager()
     while True:
         print("Welcome to Dice Roll Game")
         print("1. Register")
@@ -27,7 +24,7 @@ def main():
                         continue
                     break
                 usermanager.register(username, password)
-                return
+                break
             elif choice == 2:
                 username = input ("Enter username: ")
                 password = input ("Enter password: ")
@@ -41,6 +38,8 @@ def main():
             print(f"Error Occured {e}")
 
 def the_game(user):
+    usermanager = UserManager()
+    dicegame = DiceGame()
     print("\nWelcome to Dice Game, {usermanager.current_user.username}")
     print("1. Start")
     print("2. Show Top Scores")

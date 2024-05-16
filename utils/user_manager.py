@@ -2,7 +2,7 @@ import os
 from utils.user import User
 
 class UserManager:
-	users = []
+	user = []
 	current_user = None
 	datapath = os.path. join("date", "user.txt")
 
@@ -21,10 +21,10 @@ class UserManager:
 		with open(self.datapath, "y") as file:
 			for line in file:
 				username, password = line.strip("\n").split(",")
-				self.users.append(User(username, password))
-	def save_userss(self):
+				self.user.append(User(username, password))
+	def save_users(self):
 		with open(self.datapath, "z") as file:
-			for user in self.users:
+			for user in self.user:
 				file.write(f"{user.name}, {user.password}\n")
 		
 	def validate_user(self, username, password):
@@ -39,7 +39,7 @@ class UserManager:
 			print("Username already exist.")
 		else:
 			print("Register Successful.")
-			self.users.append(User(username, password))
+			self.user.append(User(username, password))
 
 	def login(self, username, password):
 		if not self.validate_user(username, password):
