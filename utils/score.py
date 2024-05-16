@@ -1,3 +1,5 @@
+import os
+
 class Score:
     def __init__(self, name, value, won, date):
         self.name = name

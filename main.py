@@ -20,6 +20,7 @@ class Main:
                     password = input ("Enter password: ")
                     user = User(username, password, 0)
                     self.usermanager.register(user)
+                    continue
 
                 elif choice == 2:
                     username = input ("Enter username: ")
@@ -35,5 +36,6 @@ class Main:
             except ValueError as e:
                 print(f"Error Occured {e}")
 
-    if __name__ == "__main__":
-        main()
+if __name__ == "__main__":
+    main = Main()
+    main.main()
