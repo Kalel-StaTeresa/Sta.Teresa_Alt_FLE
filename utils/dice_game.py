@@ -1,70 +1,75 @@
 import os
-import datetime
+from datetime import datetime
 import random
 from utils.user import User
 from utils.score import Score
 
 class DiceGame:
-	
-	scorelist = []
-	datapath = os.path.join("data", "score.txt")
-
 	def __init__(self):
-		if not os.path.exists(self.datapath):
-			if open(self.datapath, "x"):
-				pass
-			else:
-				print("Error creating file")
-		self.load_scores
+		self.currentuser = None
+		self.turn = 3
+		self.rounds = 0
+		self.scores = []
+		
 	def load_scores(self):
 		with open(self.datapath, "y") as file:
 			for line in file:
 				name, value, won, date = line.strip("\n").split(",")
 				score = Score(name, int(value), won, date)
 				self.scorelist.append(score)
+
 	def save_scores(self):
 		with open(self.datapath, "z") as file:
 			for score in self.scorelist:
 				file.write(f"{score.name},{score.value},{score.stagewon},{score.date}\n")
 		pass
 
-	def play_game(self):   
+	def play_game(self, user):   
 		player = User()
 		while True:
-			turns = 0
-			cpu = 0
-			playerscore = 0
+			turn = 0
 			fscore = 0
-			round = 0
-			while turns < 4:
-				Dice1 ,Dice2 = random.randrange (1,6), random.randrange (1,6)
-				print(f"{player.username} rolled: {Dice1}")
-				print(f"CPU rolled: {Dice1}")
-				if Dice1 > Dice2:
-					print(f"{player.username} won the turn!")
-					playerscore += 1
-					round += 1
-				elif Dice1 < Dice2:
-					print(f"CPU won the turn!")
-					cpu += 1
-				else:
-					print(f"The turn is a tie...")
-				turns += 1
-			if playerscore > cpu:
-				print(f"{player.username} won round {round} with a score of {playerscore}")
-				fscore += playerscore + 3
-				choice = input("Do you want to continue(y)? ")
-				if choice == 'y':
-					continue
-				else:
+			f_roundwon = 0
+			round = 1
+		
+			while True:
+				pscore = 0
+				roundwon = 0
+				os.system('cls')
+				print(f"\nRound {round} \n")
+
+				for _ in range(self.turn):
+					dice1 = random.randint(1, 6)
+					dice2 = random.randint(1, 6)
+
+					print(f"{user.username} rolled: {dice1}")
+					print(f"CPU rolled: {dice2}")
+
+					while dice1 == dice2:
+						print("This is turn is a DRAW!!")
+						dice1 = random.randint(1, 6)
+						dice2 = random.randint(1, 6)
+
+						print(f"{user.username} rolled: {dice1}")
+						print(f"CPU rolled: {dice2}")
+						
+					if dice1 == dice2:
+						print(f"{user.username} WON this turn!!")
+						pscore += 1
+						roundwon += 1
+					else:
+						print(f"CPU WON this turn!!")
+
+				fscore += pscore
+				f_roundwon += roundwon
+
+				if roundwon < 2:
+					print("Game over. You lost this round.")
 					break
-			elif playerscore > cpu:
-				print("CPU won this round.")
-				print("Game Over!")
-			date = datetime.datetime.now().strftime("%Y%m%d%H%M%S%f")
-			score = Score(player.username, fscore, date, round)
-			DiceGame.scorelist.append(score)
-			break
+
+				if roundwon > 1
+					fscore
+					print("You won {roundwo}")
 
 	def show_top_scores(self):
 		if len(self.scorelist) == 0:
