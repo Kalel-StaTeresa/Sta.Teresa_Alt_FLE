@@ -22,13 +22,14 @@ def main():
                     if len(password) < 8:
                         print("Username must be atleast 8 characters.")
                         continue
-                    break
+                    else:
+                        break
                 usermanager.register(username, password)
-                break
             elif choice == 2:
                 username = input ("Enter username: ")
                 password = input ("Enter password: ")
                 usermanager.login(username, password)
+                the_game()
             elif choice == 3:
                 print ("Exiting game...")
                 break
@@ -37,7 +38,7 @@ def main():
         except ValueError as e:
             print(f"Error Occured {e}")
 
-def the_game(user):
+def the_game():
     usermanager = UserManager()
     dicegame = DiceGame()
     print("\nWelcome to Dice Game, {usermanager.current_user.username}")

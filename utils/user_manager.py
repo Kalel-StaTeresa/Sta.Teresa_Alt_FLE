@@ -8,7 +8,7 @@ class UserManager:
 
 	def __init__(self):
 		if not os.path.exists("data"):
-			os .makedirs("data")
+			os.makedirs("data")
 			if open(self.datapath, "x"):
 				pass
 			else:
@@ -45,7 +45,9 @@ class UserManager:
 		if not self.validate_user(username, password):
 			print ("Invalid Username/Password. Pls try again...")
 			return
-		self.current_user = User(username, password)
+		else:
+			print("Log in successful.")
+			self.current_user = User(username, password)
 
 	def log_out(self):
 		self.current_user = None

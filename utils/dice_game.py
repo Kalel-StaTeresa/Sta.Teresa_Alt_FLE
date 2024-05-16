@@ -4,8 +4,6 @@ import random
 from utils.user import User
 from utils.score import Score
 
-player = User()
-
 class DiceGame:
 	
 	scorelist = []
@@ -31,7 +29,7 @@ class DiceGame:
 		pass
 
 	def play_game(self):   
-		 
+		player = User()
 		while True:
 			turns = 0
 			cpu = 0
