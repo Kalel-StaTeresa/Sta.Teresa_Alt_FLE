@@ -18,14 +18,14 @@ class Main:
                 if choice == 1:
                     username = input ("Enter Username: ")
                     password = input ("Enter password: ")
-                    user = User(username, password, 0)
+                    user = User(username, password)
                     self.usermanager.register(user)
                     continue
 
                 elif choice == 2:
                     username = input ("Enter username: ")
                     password = input ("Enter password: ")
-                    user = User(username, password, 0)
+                    user = User(username, password)
                     self.usermanager.login(user)
 
                 elif choice == 3:

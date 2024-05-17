@@ -31,7 +31,7 @@ class UserManager:
 		if len(user.password) < 8:
 			print("Username must be atleast 8 characters.")
 			return
-		user_list = user.load_users()
+		user_list = UserManager.load_users()
 		if (user.username, user.password) in user_list:
 			print("Username already exist.")
 			return
